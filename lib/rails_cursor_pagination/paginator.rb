@@ -323,22 +323,22 @@ module RailsCursorPagination
     #
     # Examples:
     #  - first 2 after 4 ascending
-    #    -> SELECT * FROM table WHERE id > 4 ODER BY id ASC LIMIT 2
+    #    -> SELECT * FROM table WHERE id >= 4 ODER BY id ASC LIMIT 2
     #  - last 2 before 4 descending      ^ records with higher value than cursor
-    #    -> SELECT * FROM table WHERE id > 4 ODER BY id ASC LIMIT 2
+    #    -> SELECT * FROM table WHERE id >= 4 ODER BY id ASC LIMIT 2
     #  but:                              ^ records with higher value than cursor
     #  - first 2 after 4 descending
-    #    -> SELECT * FROM table WHERE id < 4 ODER BY id DESC LIMIT 2
+    #    -> SELECT * FROM table WHERE id <= 4 ODER BY id DESC LIMIT 2
     #  - last 2 before 4 ascending       ^ records with lower value than cursor
-    #    -> SELECT * FROM table WHERE id < 4 ODER BY id DESC LIMIT 2
+    #    -> SELECT * FROM table WHERE id <= 4 ODER BY id DESC LIMIT 2
     #                                    ^ records with lower value than cursor
     #
-    # @return [String] either '<' or '>'
+    # @return [String] either '<=' or '>='
     def filter_operator
       if paginate_forward?
-        @order_direction == :asc ? '>' : '<'
+        @order_direction == :asc ? '>=' : '<='
       else
-        @order_direction == :asc ? '<' : '>'
+        @order_direction == :asc ? '<=' : '>='
       end
     end
 
